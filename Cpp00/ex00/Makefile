@@ -6,13 +6,13 @@
 #    By: anvannin <anvannin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/09 11:12:08 by anvannin          #+#    #+#              #
-#    Updated: 2023/08/09 12:13:03 by anvannin         ###   ########.fr        #
+#    Updated: 2023/08/10 08:46:38 by anvannin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= megaphone
 
-CC		= g++
+CC		= c++
 CFLAGS	= -Wall -Wextra -Werror
 STD		= -std=c++98
 SRCS	= megaphone.cpp

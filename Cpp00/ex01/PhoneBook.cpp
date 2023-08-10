@@ -6,7 +6,7 @@
 /*   By: anvannin <anvannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:11:36 by anvannin          #+#    #+#             */
-/*   Updated: 2023/08/09 16:48:45 by anvannin         ###   ########.fr       */
+/*   Updated: 2023/08/10 08:47:51 by anvannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,11 @@ int	PhoneBook::length(){
 }
 
 bool	PhoneBook::validCommand(std::string command){
-	if (command == "ADD" || command == "SEARCH" || command == "EXIT")
+	if (command[0] == EOF){
+		std::cout << std::endl;
+		return (true);
+	}
+	else if (command == "ADD" || command == "SEARCH" || command == "EXIT")
 		return (true);
 	std::cout	<< "Invalid command, insert a valid command" << std::endl
 				<< "ADD: add a contact" << std::endl
@@ -135,7 +139,8 @@ void	PhoneBook::searchContact(){
 	std::string last_name;
 	std::string nickname;
 
-	std::cout << "     Index|First name| Last name|  Nickname" << std::endl;
+	std::cout	<< "     Index|First name| Last name|  Nickname" << std::endl
+				<< "----------|----------|----------|----------" << std::endl;
 	while (++i < 8){
 		first_name = contacts[i].getFirstName();
 		if (first_name.length() > 10)

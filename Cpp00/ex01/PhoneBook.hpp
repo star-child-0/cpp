@@ -6,7 +6,7 @@
 /*   By: anvannin <anvannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:11:44 by anvannin          #+#    #+#             */
-/*   Updated: 2023/08/09 16:45:37 by anvannin         ###   ########.fr       */
+/*   Updated: 2023/08/09 18:20:23 by anvannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "Contact.hpp"
 # include <stdlib.h>
 # include <iomanip>
+# include <cstdio>
 
 class PhoneBook
 {
