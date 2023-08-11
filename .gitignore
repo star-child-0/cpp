@@ -1,9 +1,10 @@
 *
 !/**/
 !*.*
+!Makefile
+
 .vscode
 **.build
 **.swp
 **.out
 **.replace
-**/Harl*

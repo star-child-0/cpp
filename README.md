@@ -27,7 +27,11 @@ They are all small projects composed of standalone programs, each one with a spe
 
 Here are some resources that i found useful while working on the projects:
 
-- [cplusplus.com](http://www.cplusplus.com/)
-- [stackoverflow.com](https://stackoverflow.com/)
+- [cplusplus](http://www.cplusplus.com/)
+- [stackoverflow](https://stackoverflow.com/)
+- [cprogramming](https://www.cprogramming.com/)
+- [GeeksforGeeks](https://www.geeksforgeeks.org/)
+- [cppreference](https://en.cppreference.com)
+
 
 GLHF!
