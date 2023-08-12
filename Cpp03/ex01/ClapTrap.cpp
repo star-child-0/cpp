@@ -6,11 +6,19 @@
 /*   By: anvannin <anvannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 20:20:33 by anvannin          #+#    #+#             */
-/*   Updated: 2023/08/12 16:55:48 by anvannin         ###   ########.fr       */
+/*   Updated: 2023/08/12 17:50:45 by anvannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+
+ClapTrap::ClapTrap(){
+	std::cout << "ClapTrap default constructor called" << std::endl;
+	name = "ClapTrap";
+	hitPoints = 10;
+	energyPoints = 10;
+	attackDamage = 0;
+}
 
 ClapTrap::ClapTrap(std::string name){
 	std::cout << "ClapTrap constructor called" << std::endl;

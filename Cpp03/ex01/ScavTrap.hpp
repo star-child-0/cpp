@@ -6,7 +6,7 @@
 /*   By: anvannin <anvannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:48:06 by anvannin          #+#    #+#             */
-/*   Updated: 2023/08/12 16:41:48 by anvannin         ###   ########.fr       */
+/*   Updated: 2023/08/12 17:51:00 by anvannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 class ScavTrap : public ClapTrap{
 	private:
 	public:
+		ScavTrap();
 		ScavTrap(const std::string& name);
 		ScavTrap(ScavTrap const &src);
 		ScavTrap	&operator=(ScavTrap const & src);
