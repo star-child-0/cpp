@@ -6,7 +6,7 @@
 /*   By: anvannin <anvannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/11 18:03:12 by anvannin          #+#    #+#             */
-/*   Updated: 2023/08/11 18:22:43 by anvannin         ###   ########.fr       */
+/*   Updated: 2023/08/12 15:05:48 by anvannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@
 class Point
 {
 	private:
-		const Fixed	_x;
-		const Fixed	_y;
+		Fixed	_x;
+		Fixed	_y;
 	public:
 		Point();
 		Point(float const x, float const y);
 		Point(Point const &src);
-		// Point	&operator=(const Point &src);
+		Point	&operator=(const Point &src);
 		~Point();
 
 		const Fixed	getX() const;
