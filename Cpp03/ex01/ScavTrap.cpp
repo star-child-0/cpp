@@ -6,7 +6,7 @@
 /*   By: anvannin <anvannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 15:47:57 by anvannin          #+#    #+#             */
-/*   Updated: 2023/08/12 18:52:52 by anvannin         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:39:13 by anvannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,36 @@ ScavTrap::~ScavTrap() {
 }
 
 void ScavTrap::attack(std::string const& target) {
+	if (_energyPoints <= 0) {
+		std::cout << "ScavTrap " << _name << " is out of energy!" << std::endl;
+		return ;
+	}
 	std::cout	<< "ScavTrap " << _name << " attacks " << target << ", causing "
 				<< _attackDamage << " points of damage!" << std::endl;
+	_energyPoints--;
 }
 
 void ScavTrap::takeDamage(unsigned int amount) {
 	std::cout	<< "ScavTrap " << _name << " has taken "
 				<< amount << " points of damage!" << std::endl;
+	_hitPoints -= amount;
 }
 
 void ScavTrap::beRepaired(unsigned int amount) {
+	if (_energyPoints <= 0) {
+		std::cout << "ScavTrap " << _name << " is out of energy!" << std::endl;
+		return ;
+	}
 	std::cout	<< "ScavTrap " << _name << " is getting repaired for "
 				<< amount << " hit points!" << std::endl;
+	_hitPoints += amount;
+	_energyPoints--;
 }
 
 void ScavTrap::guardGate() {
+	if(_energyPoints <= 0){
+		std::cout << "ScavTrap " << _name << " is out of energy!" << std::endl;
+		return ;
+	}
 	std::cout << "ScavTrap " << _name << " is guarding the gate!" << std::endl;
 }

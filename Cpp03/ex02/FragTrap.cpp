@@ -6,7 +6,7 @@
 /*   By: anvannin <anvannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/12 17:11:03 by anvannin          #+#    #+#             */
-/*   Updated: 2023/08/12 18:55:14 by anvannin         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:42:03 by anvannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,13 @@ FragTrap::~FragTrap(){
 }
 
 void	FragTrap::attack(std::string const & target){
+	if (_energyPoints <= 0){
+		std::cout << "FragTrap " << _name << " is out of energy!" << std::endl;
+		return ;
+	}
 	std::cout	<< "FragTrap " << _name << " attacks " << target << ", causing "
 				<< _attackDamage << " points of damage!" << std::endl;
+	_energyPoints--;
 }
 
 void	FragTrap::takeDamage(unsigned int amount){
@@ -57,10 +62,21 @@ void	FragTrap::takeDamage(unsigned int amount){
 }
 
 void	FragTrap::beRepaired(unsigned int amount){
+	if (_energyPoints <= 0){
+		std::cout << "FragTrap " << _name << " is out of energy!" << std::endl;
+		return ;
+	}
 	std::cout	<< "FragTrap " << _name << " is getting repaired for "
 				<< amount << " hit points!" << std::endl;
+	_energyPoints--;
+	_hitPoints += amount;
 }
 
 void	FragTrap::highFivesGuys(void){
+	if (_energyPoints <= 0){
+		std::cout << "FragTrap " << _name << " is out of energy!" << std::endl;
+		return ;
+	}
 	std::cout << "FragTrap " << _name << " gives you a high five!" << std::endl;
+	_energyPoints--;
 }
