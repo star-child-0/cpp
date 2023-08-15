@@ -17,9 +17,9 @@ They are all small projects composed of standalone programs, each one with a spe
 |:------:|:-----:|:-------:|
 | [Cpp00](./Cpp00) | [![anvannin's 42 CPP Module 00 Score](https://badge42.vercel.app/api/v2/cleh36s9k00060fmefi6qv520/project/3144235)](https://github.com/JaeSeoKim/badge42) | [<img alt="Static Badge" src="https://img.shields.io/badge/Subject-v.8-teal">](./Cpp00/en.subject.pdf)
 | [Cpp01](./Cpp01) | [![anvannin's 42 CPP Module 01 Score](https://badge42.vercel.app/api/v2/cleh36s9k00060fmefi6qv520/project/3233719)](https://github.com/JaeSeoKim/badge42)| [<img alt="Static Badge" src="https://img.shields.io/badge/Subject-v.9.2-teal">](./Cpp01/en.subject.pdf)
-| [Cpp02](./Cpp02) | | [<img alt="Static Badge" src="https://img.shields.io/badge/Subject-v.7.1-teal">](./Cpp02/en.subject.pdf)
-| [Cpp03](./Cpp03) | | [<img alt="Static Badge" src="https://img.shields.io/badge/Subject-v.6-teal">](./Cpp03/en.subject.pdf)
-| [Cpp04](./Cpp04) | | [<img alt="Static Badge" src="https://img.shields.io/badge/Subject-v.10-teal">](./Cpp04/en.subject.pdf)
+| [Cpp02](./Cpp02) | [![anvannin's 42 CPP Module 02 Score](https://badge42.vercel.app/api/v2/cleh36s9k00060fmefi6qv520/project/3235023)](https://github.com/JaeSeoKim/badge42) | [<img alt="Static Badge" src="https://img.shields.io/badge/Subject-v.7.1-teal">](./Cpp02/en.subject.pdf)
+| [Cpp03](./Cpp03) | [![anvannin's 42 CPP Module 03 Score](https://badge42.vercel.app/api/v2/cleh36s9k00060fmefi6qv520/project/3236004)](https://github.com/JaeSeoKim/badge42) | [<img alt="Static Badge" src="https://img.shields.io/badge/Subject-v.6-teal">](./Cpp03/en.subject.pdf)
+| [Cpp04](./Cpp04) | [![anvannin's 42 CPP Module 04 Score](https://badge42.vercel.app/api/v2/cleh36s9k00060fmefi6qv520/project/3238886)](https://github.com/JaeSeoKim/badge42) | [<img alt="Static Badge" src="https://img.shields.io/badge/Subject-v.10-teal">](./Cpp04/en.subject.pdf)
 
 </center>
 
