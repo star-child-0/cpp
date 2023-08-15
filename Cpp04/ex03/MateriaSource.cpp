@@ -6,28 +6,45 @@
 /*   By: anvannin <anvannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:29:10 by anvannin          #+#    #+#             */
-/*   Updated: 2023/08/14 19:29:26 by anvannin         ###   ########.fr       */
+/*   Updated: 2023/08/15 15:48:44 by anvannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MateriaSource.hpp"
 
 MateriaSource::MateriaSource() {
-	std::cout << "MateriaSource default constructor called." << std::endl;
+	for (int i = 0; i < 4; i++)
+		_materia[i] = NULL;
 }
 
 MateriaSource::MateriaSource(MateriaSource const & src) {
-	std::cout << "MateriaSource copy constructor called." << std::endl;
 	*this = src;
 }
 
 MateriaSource& MateriaSource::operator=(MateriaSource const & src) {
-	std::cout << "MateriaSource assignation operator called." << std::endl;
 	if (this != &src){
+		for (int i = 0; i < 4; i++)
+			_materia[i] = src._materia[i];
 	}
 	return (*this);
 }
 
 MateriaSource::~MateriaSource() {
-	std::cout << "MateriaSource destructor called." << std::endl;
+	for (int i = 0; i < 4; i++)
+		delete _materia[i];
+}
+
+void	MateriaSource::learnMateria(AMateria* materia) {
+	for (int i = 0; i < 4; i++)
+		if (!_materia[i]){
+			_materia[i] = materia;
+			break ;
+		}
+}
+
+AMateria*	MateriaSource::createMateria(std::string const & type) {
+	for (int i = 0; i < 4; i++)
+		if (_materia[i] && _materia[i]->getType() == type)
+			return (_materia[i]->clone());
+	return (NULL);
 }
