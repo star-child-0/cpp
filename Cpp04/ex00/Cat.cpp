@@ -29,7 +29,7 @@ Cat&	Cat::operator=(Cat const& src) {
 	return (*this);
 }
 
-Cat::~Cat(void) {
+Cat::~Cat(void){
 	std::cout << "Cat destructor called." << std::endl;
 }
 
