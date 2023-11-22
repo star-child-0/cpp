@@ -15,10 +15,37 @@
 #include <fstream>
 #include <string.h>
 
-int	main(int ac, char **av)
+std::string	str_replace(std::string str, std::string s1, std::string s2)
 {
 	unsigned long	i;
 	unsigned long	j;
+	unsigned long	k;
+	std::string		substr;
+
+	i = 0;
+	while (i < str.length())
+	{
+		j = 0;
+		k = i;
+		while (str[i] == s1[j] && j < s1.length())
+		{
+			i++;
+			j++;
+		}
+		if (j == s1.length())
+		{
+			str.erase(k, j);
+			str.insert(k, s2);
+			i = k + s2.length();
+		}
+		else
+			i++;
+	}
+	return (str);
+}
+
+int	main(int ac, char **av)
+{
 	std::ifstream	readFile;
 	std::ofstream	writeFile;
 	std::string		line;
@@ -43,17 +70,7 @@ int	main(int ac, char **av)
 	}
 
 	while (getline(readFile, line)){
-		i = -1;
-		while (++i < line.length()){
-			if (line[i] == s1[0]){
-				substr = line.substr(0, i) + s2;
-				j = -1;
-				while (line[i] == s1[++j])
-					i++;
-				line = substr + line.substr(i, line.length());
-			}
-		}
-		writeFile << line << std::endl;
+		writeFile << str_replace(line, s1, s2) << std::endl;
 	}
 
 	readFile.close();

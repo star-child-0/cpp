@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= harlFilter
+NAME	= HarlFilter
 
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror
