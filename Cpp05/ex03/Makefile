@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= NoYouNeedForm28BNot28C
+NAME	= AtLeastThisBeatsCoffeeMaking
 
 CC		= c++
 CFLAGS	= -Wall -Wextra -Werror
@@ -21,7 +21,8 @@ SRCS	= \
 		AForm.cpp \
 		ShrubberyCreationForm.cpp \
 		RobotomyRequestForm.cpp \
-		PresidentialPardonForm.cpp
+		PresidentialPardonForm.cpp \
+		Intern.cpp
 
 OBJ_DIR	= .build
 OBJS	= $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
