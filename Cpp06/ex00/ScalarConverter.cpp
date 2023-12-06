@@ -39,6 +39,8 @@ bool ScalarConverter::_isInt(const std::string num)
 
 bool ScalarConverter::_isFloat (const std::string num)
 {
+	if (num[num.length() - 1] != 'f')
+		return false;
 	if (num == "nan" || num == "nanf" || num == "-inf" || num == "inf"
 		|| num == "+inf" || num == "-inff" || num == "inff" || num == "+inff")
 		return true;
@@ -115,9 +117,10 @@ float ScalarConverter::_stof(std::string str)
 	float num = 0;
 	float div = 1;
 
-	if (str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 	{
-		sign = -1;
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
 	while (str[i] != '\0')
@@ -125,14 +128,10 @@ float ScalarConverter::_stof(std::string str)
 		if (str[i] == '.')
 		{
 			i++;
-			while (str[i] != '\0')
-			{
-				if (!std::isdigit(str[i]))
-					throw std::invalid_argument("stof");
-				div *= 10;
-				num = num * 10 + str[i] - '0';
-				i++;
-			}
+			if (!std::isdigit(str[i]))
+				throw std::invalid_argument("stof");
+			div *= 10;
+			num = num * 10 + str[i] - '0';
 			break;
 		}
 		if (!std::isdigit(str[i]))
@@ -150,9 +149,10 @@ double ScalarConverter::_stod(std::string str)
 	double num = 0;
 	double div = 1;
 
-	if (str[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 	{
-		sign = -1;
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
 	while (str[i] != '\0')
@@ -160,14 +160,11 @@ double ScalarConverter::_stod(std::string str)
 		if (str[i] == '.')
 		{
 			i++;
-			while (str[i] != '\0')
-			{
-				if (!std::isdigit(str[i]))
-					throw std::invalid_argument("stod");
-				div *= 10;
-				num = num * 10 + str[i] - '0';
-				i++;
-			}
+			if (!std::isdigit(str[i]))
+				throw std::invalid_argument("stod");
+			div *= 10;
+			num = num * 10 + str[i] - '0';
+			i++;
 			break;
 		}
 		if (!std::isdigit(str[i]))
