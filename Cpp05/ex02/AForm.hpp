@@ -4,9 +4,6 @@
 #include <stdbool.h>
 #include <iostream>
 
-
-
-
 class Bureaucrat;
 
 class AForm
