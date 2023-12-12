@@ -6,6 +6,8 @@
 #include <sstream>
 #include <map>
 
+#define INVALID_VALUE -1
+
 class BitcoinExchange
 {
 	private:
@@ -23,6 +25,9 @@ class BitcoinExchange
 		int _stoi(std::string str);
 		bool _validateValue(std::string value, std::string type);
 		float _stof(std::string value);
+
+		float _valueAtDate(std::string date);
+		void _exchange();
 	public:
 		BitcoinExchange(char * const fileName);
 		BitcoinExchange(BitcoinExchange const &other);

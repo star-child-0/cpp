@@ -6,6 +6,7 @@ BitcoinExchange::BitcoinExchange(char * const fileName) : _fileName(fileName)
 {
 	_loadInputFile(fileName);
 	_loadDatabase();
+	_exchange();
 }
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &other) :
@@ -77,6 +78,7 @@ void BitcoinExchange::_readFile(std::ifstream &file, std::string type)
 		else if (type == "input" && (!_validateDate(date) || !_validateValue(value, type)))
 			throw InputFileErrorException();
 
+		date.erase(date.find_last_not_of(" \t\n\r") + 1);
 		value.erase(0, value.find_first_not_of(" \t\n\r"));
 
 		if (type == "database")
@@ -175,6 +177,38 @@ float BitcoinExchange::_stof(std::string value)
 		i++;
 	}
 	return (num / div);
+}
+
+float BitcoinExchange::_valueAtDate(std::string date)
+{
+	float value = INVALID_VALUE;
+	std::map<int, std::pair<std::string, float> >::iterator it;
+
+	for (it = _database.begin(); it != _database.end(); it++)
+	{
+		value = it->second.second;
+
+		if (it->second.first == date)
+			return (it->second.second);
+		else if (it->second.first > date)
+			return (value);
+	}
+	return INVALID_VALUE;
+}
+
+void BitcoinExchange::_exchange()
+{
+	std::string date;
+	float value;
+	std::map< int, std::pair< std::string, float > >::iterator it;
+
+	for (it = _inputfile.begin(); it != _inputfile.end(); it++)
+	{
+		date = it->second.first;
+		value = it->second.second;
+
+		std::cout << date << " | " << value << " => " << value * _valueAtDate(date) << std::endl;
+	}
 }
 
 const char *BitcoinExchange::FileDoesNotExistException::what() const throw()
