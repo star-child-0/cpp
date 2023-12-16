@@ -16,6 +16,8 @@ class BitcoinExchange
 		std::map<int, std::pair<std::string, float> > _inputfile;
 
 		BitcoinExchange();
+		BitcoinExchange(BitcoinExchange const &other);
+		BitcoinExchange &operator=(BitcoinExchange const &other);
 
 		void _loadInputFile(char * const fileName);
 		void _loadDatabase();
@@ -30,8 +32,6 @@ class BitcoinExchange
 		void _exchange();
 	public:
 		BitcoinExchange(char * const fileName);
-		BitcoinExchange(BitcoinExchange const &other);
-		BitcoinExchange &operator=(BitcoinExchange const &other);
 		~BitcoinExchange();
 
 		class FileDoesNotExistException : public std::exception

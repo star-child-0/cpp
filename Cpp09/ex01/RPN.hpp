@@ -13,6 +13,9 @@ class RPN
 		std::queue<char> _operators;
 
 		RPN();
+		RPN(const RPN &rpn);
+		RPN &operator=(const RPN &rpn);
+
 		void _splitInput(char const *input);
 		void _validateNumber(char const *input);
 		void _validateOperator(char const *input);
@@ -20,8 +23,6 @@ class RPN
 		void _exec();
 	public:
 		RPN(char const *input);
-		RPN(const RPN &rpn);
-		RPN &operator=(const RPN &rpn);
 		~RPN();
 
 		class InvalidInputException : public std::exception {
