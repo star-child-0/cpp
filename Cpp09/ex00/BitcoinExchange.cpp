@@ -73,11 +73,6 @@ void BitcoinExchange::_readFile(std::ifstream &file, std::string type)
 			std::getline(ss, date, '|');
 		std::getline(ss, value);
 
-		if (type == "database" && (!_validateDate(date) || !_validateValue(value, type)))
-			throw DatabaseErrorException();
-		else if (type == "input" && (!_validateDate(date) || !_validateValue(value, type)))
-			throw InputFileErrorException();
-
 		date.erase(date.find_last_not_of(" \t\n\r") + 1);
 		value.erase(0, value.find_first_not_of(" \t\n\r"));
 
@@ -132,20 +127,14 @@ int BitcoinExchange::_stoi(std::string str)
 	return (num * sign);
 }
 
-bool BitcoinExchange::_validateValue(std::string value, std::string type)
+bool BitcoinExchange::_validateValue(float value, std::string type)
 {
-	float n;
-
-	value.erase(0, value.find_first_not_of(" \t\n\r"));
-	if (value == "" || value[0] == '-')
+	if (type == "input" && value <= 0)
 		return false;
-	try{
-		n = _stof(value);
-		if (n < 0 || (type == "input" && n > 1000))
-			return false;
-	} catch(...) {
+	else if (type == "input" && value > 1000)
 		return false;
-	}
+	else if (type == "database" && value <= 0)
+		return false;
 	return true;
 }
 
@@ -154,7 +143,13 @@ float BitcoinExchange::_stof(std::string value)
 	int i = 0;
 	float num = 0;
 	float div = 1;
+	int sign = 1;
 
+	if (value[i] == '-')
+	{
+		i++;
+		sign = -1;
+	}
 	while (value[i] != '\0')
 	{
 		if (value[i] == '.')
@@ -176,7 +171,7 @@ float BitcoinExchange::_stof(std::string value)
 		num = num * 10 + value[i] - '0';
 		i++;
 	}
-	return (num / div);
+	return (num / div * sign);
 }
 
 float BitcoinExchange::_valueAtDate(std::string date)
@@ -207,7 +202,12 @@ void BitcoinExchange::_exchange()
 		date = it->second.first;
 		value = it->second.second;
 
-		std::cout << date << " | " << value << " => " << value * _valueAtDate(date) << std::endl;
+		if (!_validateDate(date))
+			std::cout << "Error: invalid date." << std::endl;
+		else if (!_validateValue(value, "input"))
+			std::cout << "Error: invalid value." << std::endl;
+		else
+			std::cout << date << " | " << value << " => " << value * _valueAtDate(date) << std::endl;
 	}
 }
 

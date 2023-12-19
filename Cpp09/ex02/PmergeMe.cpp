@@ -79,7 +79,7 @@ void PmergeMe::_sortVector()
 	start = std::clock();
 	_Vmis(_v, 0, _v.size() - 1);
 	end = std::clock();
-	time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+	time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
 	std::cout << "After: ";
 	_printVector();
@@ -148,7 +148,7 @@ void PmergeMe::_sortDeque()
 	start = std::clock();
 	_Dmis(_d, 0, _d.size() - 1);
 	end = std::clock();
-	time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000;
+	time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 
 	std::cout	<< "Time to process a range of " << _d.size()
 				<< " elements with std::deque: " << time << " us" << std::endl;

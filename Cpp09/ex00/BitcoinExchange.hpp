@@ -25,7 +25,7 @@ class BitcoinExchange
 
 		bool _validateDate(std::string date);
 		int _stoi(std::string str);
-		bool _validateValue(std::string value, std::string type);
+		bool _validateValue(float value, std::string type);
 		float _stof(std::string value);
 
 		float _valueAtDate(std::string date);
