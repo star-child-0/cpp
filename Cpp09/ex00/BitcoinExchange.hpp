@@ -4,6 +4,9 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <cstdlib>
+#include <cstring>
+#include <cmath>
 #include <map>
 
 #define INVALID_VALUE -1

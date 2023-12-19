@@ -3,24 +3,22 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
-#include <queue>
+#include <cmath>
+#include <stack>
 
 class RPN
 {
 	private:
-		std::queue<char*> _input;
-		std::queue<int> _operands;
-		std::queue<char> _operators;
+		std::stack<float> _stack;
 
 		RPN();
 		RPN(const RPN &rpn);
 		RPN &operator=(const RPN &rpn);
 
-		void _splitInput(char const *input);
-		void _validateNumber(char const *input);
-		void _validateOperator(char const *input);
+		bool _validNumber(char const *input);
+		bool _validOperator(char const *input);
 
-		void _exec();
+		void _exec(char const op);
 	public:
 		RPN(char const *input);
 		~RPN();

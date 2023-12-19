@@ -74,6 +74,8 @@ void BitcoinExchange::_readFile(std::ifstream &file, std::string type)
 		std::getline(ss, value);
 
 		date.erase(date.find_last_not_of(" \t\n\r") + 1);
+		if (date.length() != 10)
+			date = "0000-00-00";
 		value.erase(0, value.find_first_not_of(" \t\n\r"));
 
 		if (type == "database")
@@ -85,13 +87,20 @@ void BitcoinExchange::_readFile(std::ifstream &file, std::string type)
 }
 
 bool BitcoinExchange::_validateDate(std::string date)
-{	if (date == "")
-		return false;
-	date.erase(10, date.find_last_not_of(" \t\n\r") + 1);
+{
+	std::string first = _database.begin()->second.first;
+	int fy = _stoi(first.substr(0, first.find("-")));
+	int fm = _stoi(first.substr(first.find("-") + 1, first.find_last_of("-") - first.find("-") - 1));
+	int fd = _stoi(first.substr(first.find_last_of("-") + 1, first.find_last_of("-")));
+
 	int y = _stoi(date.substr(0, date.find("-")));
 	int m = _stoi(date.substr(date.find("-") + 1, date.find_last_of("-") - date.find("-") - 1));
 	int d = _stoi(date.substr(date.find_last_of("-") + 1, date.find_last_of("-")));
 
+	if (y > 9999)
+		return false;
+	if (y < fy || (y == fy && m < fm) || (y == fy && m == fm && d < fd))
+		return false;
 	if ((m < 1 || m > 12) || (d < 1 || d > 31))
 		return false;
 	if ((y % 4 == 0 && m == 2 && d > 29) || (y % 4 != 0 && m == 2 && d > 28))
@@ -129,9 +138,7 @@ int BitcoinExchange::_stoi(std::string str)
 
 bool BitcoinExchange::_validateValue(float value, std::string type)
 {
-	if (type == "input" && value <= 0)
-		return false;
-	else if (type == "input" && value > 1000)
+	if (type == "input" && (value < 0 || value > 1000))
 		return false;
 	else if (type == "database" && value <= 0)
 		return false;
@@ -188,7 +195,7 @@ float BitcoinExchange::_valueAtDate(std::string date)
 		else if (it->second.first > date)
 			return (value);
 	}
-	return INVALID_VALUE;
+	return value;
 }
 
 void BitcoinExchange::_exchange()
