@@ -73,13 +73,12 @@ void PmergeMe::_printArgs()
 
 void PmergeMe::_sortVector()
 {
-	std::clock_t start, end;
+	std::clock_t start;
 	double time;
 
 	start = std::clock();
-	_Vmis(_v, 0, _v.size() - 1);
-	end = std::clock();
-	time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
+	_VMIS(_v, 0, _v.size() - 1);
+	time = _elapsed(start, std::clock());
 
 	std::cout << "After: ";
 	_printVector();
@@ -87,20 +86,20 @@ void PmergeMe::_sortVector()
 				<< " elements with std::vector: " << time << " us" << std::endl;
 }
 
-void PmergeMe::_Vmis(std::vector<int> &v, int begin, int end)
+void PmergeMe::_VMIS(std::vector<int> &v, int begin, int end)
 {
 	int mid;
 
 	if (begin < end)
 	{
 		mid = (begin + end) / 2;
-		_Vmis(v, begin, mid);
-		_Vmis(v, mid + 1, end);
-		_Vmerge(v, begin, mid, end);
+		_VMIS(v, begin, mid);
+		_VMIS(v, mid + 1, end);
+		_VMerge(v, begin, mid, end);
 	}
 }
 
-void PmergeMe::_Vmerge(std::vector<int> &v, int begin, int middle, int end)
+void PmergeMe::_VMerge(std::vector<int> &v, int begin, int middle, int end)
 {
 	int i = begin;
 	int j = middle + 1;
@@ -142,13 +141,12 @@ void PmergeMe::_printVector()
 
 void PmergeMe::_sortDeque()
 {
-	std::clock_t start, end;
+	std::clock_t start;
 	double time;
 
 	start = std::clock();
 	_Dmis(_d, 0, _d.size() - 1);
-	end = std::clock();
-	time = static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
+	time = _elapsed(start, std::clock());
 
 	std::cout	<< "Time to process a range of " << _d.size()
 				<< " elements with std::deque: " << time << " us" << std::endl;
@@ -187,6 +185,11 @@ void PmergeMe::_Dmerge(std::deque<int> &d, int begin, int middle, int end)
 		tmp[k++] = d[j++];
 	for (i = begin; i <= end; i++)
 		d[i] = tmp[i - begin];
+}
+
+double PmergeMe::_elapsed(std::clock_t start, std::clock_t end)
+{
+	return static_cast<double>(end - start) / CLOCKS_PER_SEC * 1000000;
 }
 
 const char *PmergeMe::NegativeNumberException::what() const throw()

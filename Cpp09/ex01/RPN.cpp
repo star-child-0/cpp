@@ -16,7 +16,7 @@ RPN::RPN(char const *input)
 		else if (!_validNumber(tmp))
 			throw InvalidInputException();
 		else
-			_stack.push(tmp[0] - 48);
+			_stack.push(std::atoi(tmp));
 
 		tmp = std::strtok(NULL, " ");
 	}
@@ -41,12 +41,13 @@ RPN::~RPN() { }
 
 bool RPN::_validNumber(char const *input)
 {
-	if (std::strlen(input) != 1 || !std::isdigit(*input))
-		return false;
+	for (int i = 0; input[i]; i++)
+		if (!std::isdigit(input[i]) && input[i] != '-')
+			return false;
 
 	int n = std::atoi(input);
 
-	if (n < 0 || n > 9)
+	if (n < -9 || n > 9)
 		return false;
 	return true;
 }
@@ -65,9 +66,6 @@ void RPN::_exec(char const op)
 	float a = _stack.top();
 	_stack.pop();
 	float b = _stack.top();
-
-	if (a == 0 && b == 0 && op == '/')
-		throw InvalidInputException();
 
 	switch (op)
 	{

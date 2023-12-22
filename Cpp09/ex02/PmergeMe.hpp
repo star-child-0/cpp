@@ -22,13 +22,15 @@ class PmergeMe
 		void _printArgs();
 
 		void _sortVector();
-		void _Vmis(std::vector<int> &v, int begin, int end);
-		void _Vmerge(std::vector<int> &v, int begin, int middle, int end);
+		void _VMIS(std::vector<int> &v, int begin, int end);
+		void _VMerge(std::vector<int> &v, int begin, int middle, int end);
 		void _printVector();
 
 		void _sortDeque();
 		void _Dmis(std::deque<int> &d, int begin, int end);
 		void _Dmerge(std::deque<int> &d, int begin, int middle, int end);
+
+		double _elapsed(std::clock_t start, std::clock_t end);
 	public:
 		PmergeMe(char **av);
 		~PmergeMe();

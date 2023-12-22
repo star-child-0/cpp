@@ -5,7 +5,11 @@ BitcoinExchange::BitcoinExchange() : _fileName("") { }
 BitcoinExchange::BitcoinExchange(char * const fileName) : _fileName(fileName)
 {
 	_loadInputFile(fileName);
+	if (_inputfile.size() == 0)
+		throw InputFileErrorException();
 	_loadDatabase();
+	if (_database.size() == 0)
+		throw DatabaseErrorException();
 	_exchange();
 }
 
@@ -73,10 +77,31 @@ void BitcoinExchange::_readFile(std::ifstream &file, std::string type)
 			std::getline(ss, date, '|');
 		std::getline(ss, value);
 
+		if (date.length() != 10 && type == "database")
+			throw DatabaseErrorException();
+		else if (date.length() != 11 && type == "input")
+			throw InputFileErrorException();
+		if (isspace(date[0]) && type == "database")
+			throw DatabaseErrorException();
+		else if (isspace(date[0]) && type == "input")
+			throw InputFileErrorException();
+		if (date.find_first_not_of("0123456789-") != std::string::npos && type == "database")
+			throw DatabaseErrorException();
+		else if (date.find_first_not_of("0123456789- ") != std::string::npos && type == "input")
+			throw InputFileErrorException();
+
 		date.erase(date.find_last_not_of(" \t\n\r") + 1);
 		if (date.length() != 10)
 			date = "0000-00-00";
-		value.erase(0, value.find_first_not_of(" \t\n\r"));
+		value.erase(0, value.find_first_not_of("\t\n\r "));
+		value.erase(value.find_last_not_of("\t\n\r ") + 1);
+
+		if (isspace(date[date.length() - 1]) && type == "database")
+			throw DatabaseErrorException();
+		else if (isspace(date[date.length() - 1]) && type == "input")
+			throw InputFileErrorException();
+		else if (value == "" || value == "-")
+			throw InputFileErrorException();
 
 		if (type == "database")
 			_database.insert(std::make_pair(i, std::make_pair(date, _stof(value))));
@@ -152,10 +177,11 @@ float BitcoinExchange::_stof(std::string value)
 	float div = 1;
 	int sign = 1;
 
-	if (value[i] == '-')
+	if (value[i] == '-' || value[i] == '+')
 	{
+		if (value[i] == '-')
+			sign = -1;
 		i++;
-		sign = -1;
 	}
 	while (value[i] != '\0')
 	{
@@ -188,12 +214,12 @@ float BitcoinExchange::_valueAtDate(std::string date)
 
 	for (it = _database.begin(); it != _database.end(); it++)
 	{
-		value = it->second.second;
-
 		if (it->second.first == date)
 			return (it->second.second);
 		else if (it->second.first > date)
 			return (value);
+
+		value = it->second.second;
 	}
 	return value;
 }
